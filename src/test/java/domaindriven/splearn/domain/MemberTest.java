@@ -1,5 +1,7 @@
 package domaindriven.splearn.domain;
 
+import static domaindriven.splearn.domain.MemberFixture.createMemberRegisterRequest;
+import static domaindriven.splearn.domain.MemberFixture.createPasswordEncoder;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -13,22 +15,12 @@ class MemberTest {
 
     @BeforeEach
     void setUp() {
-        this.passwordEncoder = new PasswordEncoder() {
-            @Override
-            public String encode(String password) {
-                return password.toUpperCase();
-            }
-
-            @Override
-            public boolean matches(String password, String passwordHash) {
-                return encode(password).equals(passwordHash);
-            }
-        };
-        member = Member.create(new MemberCreateRequest("byunguk@splearn.com", "rockernun", "secret"), passwordEncoder);
+        this.passwordEncoder = createPasswordEncoder();
+        member = Member.register(createMemberRegisterRequest(), passwordEncoder);
     }
 
     @Test
-    void createMember() {
+    void registerMember() {
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
     }
     
@@ -101,5 +93,14 @@ class MemberTest {
         member.deactivate();
 
         assertThat(member.isActive()).isFalse();
+    }
+
+    @Test
+    void invalidEmail() {
+        assertThatThrownBy(() -> {
+            Member.register(createMemberRegisterRequest("invalid email"), passwordEncoder);
+        }).isInstanceOf(IllegalArgumentException.class);
+
+        Member.register(createMemberRegisterRequest(), passwordEncoder);
     }
 }
