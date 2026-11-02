@@ -1,5 +1,6 @@
 package domaindriven.splearn.application;
 
+import domaindriven.splearn.application.provided.MemberFinder;
 import domaindriven.splearn.application.provided.MemberRegister;
 import domaindriven.splearn.application.required.EmailSender;
 import domaindriven.splearn.application.required.MemberRepository;
@@ -17,7 +18,8 @@ import org.springframework.validation.annotation.Validated;
 @Transactional
 @Validated
 @RequiredArgsConstructor
-public class MemberService implements MemberRegister {
+public class MemberModifyService implements MemberRegister {
+    private final MemberFinder memberFinder;
     private final MemberRepository memberRepository;
     private final EmailSender emailSender;
     private final PasswordEncoder passwordEncoder;
@@ -33,6 +35,15 @@ public class MemberService implements MemberRegister {
         sendWelcomeEmail(member);
 
         return member;
+    }
+
+    @Override
+    public Member activate(Long memberId) {
+        Member member = memberFinder.find(memberId);
+
+        member.activate();
+
+        return memberRepository.save(member);
     }
 
     private void sendWelcomeEmail(Member member) {
