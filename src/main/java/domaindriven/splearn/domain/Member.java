@@ -1,7 +1,6 @@
 package domaindriven.splearn.domain;
 
 import java.util.Objects;
-import java.util.regex.Pattern;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -20,7 +19,7 @@ public class Member {
 
     private Member() {}
 
-    public static Member create(MemberCreateRequest createRequest, PasswordEncoder passwordEncoder) {
+    public static Member register(MemberRegisterRequest createRequest, PasswordEncoder passwordEncoder) {
         Member member = new Member();
 
         member.email = new Email(createRequest.email());
