@@ -9,4 +9,6 @@ import jakarta.validation.Valid;
  */
 public interface MemberRegister {
     Member register(@Valid MemberRegisterRequest registerRequest);
+
+    Member activate(Long memberId);
 }
