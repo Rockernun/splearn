@@ -9,6 +9,7 @@ import domaindriven.splearn.domain.Member;
 import domaindriven.splearn.domain.MemberFixture;
 import domaindriven.splearn.domain.MemberRegisterRequest;
 import domaindriven.splearn.domain.MemberStatus;
+import jakarta.persistence.EntityManager;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 @Transactional
 @Import(SplearnTestConfiguration.class)
-public record MemberRegisterTest(MemberRegister memberRegister) {
+public record MemberRegisterTest(MemberRegister memberRegister, EntityManager entityManager) {
 
     @Test
     void register() {
@@ -36,6 +37,18 @@ public record MemberRegisterTest(MemberRegister memberRegister) {
                 .isInstanceOf(DuplicateEmailException.class);
     }
     
+    @Test
+    void activate() {
+        Member member = memberRegister.register(MemberFixture.createMemberRegisterRequest());
+        entityManager.flush();
+        entityManager.clear();
+
+        member = memberRegister.activate(member.getId());
+        entityManager.flush();
+
+        assertThat(member.getStatus()).isEqualTo(MemberStatus.ACTIVE);
+    }
+
     @Test
     void memberRegisterRequestFail() {
         extracted(new MemberRegisterRequest("byunguk@splearn.com", "rock", "veryverysecret"));
