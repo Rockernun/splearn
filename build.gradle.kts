@@ -1,5 +1,3 @@
-import sun.jvmstat.monitor.MonitoredVmUtil.jvmArgs
-
 plugins {
     java
     id("org.springframework.boot") version "4.1.2"
@@ -47,4 +45,8 @@ dependencies {
 tasks.withType<Test> {
     useJUnitPlatform()
     jvmArgs("-javaagent:${mockitoAgent.asPath}")
+}
+
+spotbugs {
+    excludeFilter.set(file("${projectDir}/spotbugs-exclude-filter.xml"))
 }
