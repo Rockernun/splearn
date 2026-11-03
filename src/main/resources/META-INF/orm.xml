@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings xmlns="http://www.hibernate.org/xsd/orm/mapping"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://www.hibernate.org/xsd/orm/mapping
+                                     https://hibernate.org/xsd/orm/mapping/mapping-3.1.0.xsd">
+    <access>FIELD</access>
+
+    <mapped-superclass class="domaindriven.splearn.domain.AbstractEntity">
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY"/>
+            </id>
+        </attributes>
+    </mapped-superclass>
+
+    <entity class="domaindriven.splearn.domain.Member">
+        <table name="MEMBER">
+            <unique-constraint name="UK_MEMBER_EMAIL_ADDRESS">
+                <column-name>email_address</column-name>
+            </unique-constraint>
+        </table>
+        <attributes>
+            <natural-id>
+                <embedded name="email">
+                    <attribute-override name="address">
+                        <column name="email_address" nullable="false" length="150"/>
+                    </attribute-override>
+                </embedded>
+            </natural-id>
+            <basic name="nickname">
+                <column nullable="false" length="100"/>
+            </basic>
+            <basic name="passwordHash">
+                <column nullable="false" length="200"/>
+            </basic>
+            <basic name="status">
+                <column nullable="false" length="50"/>
+                <enumerated>STRING</enumerated>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
