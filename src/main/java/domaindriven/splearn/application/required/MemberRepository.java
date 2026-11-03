@@ -1,6 +1,5 @@
 package domaindriven.splearn.application.required;
 
-import domaindriven.splearn.domain.DuplicateEmailException;
 import domaindriven.splearn.domain.Email;
 import domaindriven.splearn.domain.Member;
 import java.util.Optional;

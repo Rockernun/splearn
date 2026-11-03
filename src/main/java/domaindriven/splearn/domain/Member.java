@@ -1,5 +1,7 @@
 package domaindriven.splearn.domain;
 
+import static org.springframework.util.Assert.state;
+
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -14,8 +16,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
-
-import static org.springframework.util.Assert.state;
 
 @Entity
 @Getter
