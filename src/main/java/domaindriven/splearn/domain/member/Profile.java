@@ -1,9 +1,7 @@
 package domaindriven.splearn.domain.member;
 
-import jakarta.persistence.Embeddable;
 import java.util.regex.Pattern;
 
-@Embeddable
 public record Profile(String address) {
 
     private static final Pattern PROFILE_ADDRESS_PATTERN =

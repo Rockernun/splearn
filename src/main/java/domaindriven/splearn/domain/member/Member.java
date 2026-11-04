@@ -4,10 +4,7 @@ import static org.springframework.util.Assert.state;
 
 import domaindriven.splearn.domain.AbstractEntity;
 import domaindriven.splearn.domain.shared.Email;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToOne;
 import java.util.Objects;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -29,7 +26,6 @@ public class Member extends AbstractEntity {
 
     private MemberStatus status;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private MemberDetail detail;
 
     public static Member register(MemberRegisterRequest registerRequest, PasswordEncoder passwordEncoder) {

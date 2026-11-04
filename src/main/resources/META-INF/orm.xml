@@ -18,6 +18,9 @@
             <unique-constraint name="UK_MEMBER_EMAIL_ADDRESS">
                 <column-name>email_address</column-name>
             </unique-constraint>
+            <unique-constraint name="UK_MEMBER_DETAIL_ID">
+                <column-name>detail_id</column-name>
+            </unique-constraint>
         </table>
         <attributes>
             <natural-id>
@@ -37,22 +40,38 @@
                 <column nullable="false" length="50"/>
                 <enumerated>STRING</enumerated>
             </basic>
-            <one-to-one name="detail">
+            <one-to-one name="detail" fetch="LAZY">
                 <cascade>
-                    <cascade-persist/>
+                    <cascade-all/>
                 </cascade>
             </one-to-one>
         </attributes>
     </entity>
 
     <entity class="domaindriven.splearn.domain.member.MemberDetail">
-        <table name="MEMBER_DETAIL"/>
+        <table name="MEMBER_DETAIL">
+            <unique-constraint name="UK_MEMBER_DETAIL_PROFILE_ADDRESS">
+                <column-name>profile_address</column-name>
+            </unique-constraint>
+        </table>
         <attributes>
-            <basic name="profile"/>
-            <basic name="introduction"/>
-            <basic name="registeredAt"/>
+            <basic name="introduction">
+                <column column-definition="TEXT"/>
+            </basic>
+            <basic name="registeredAt">
+                <column nullable="false"/>
+            </basic>
             <basic name="activatedAt"/>
             <basic name="deactivatedAt"/>
+            <embedded name="profile"/>
         </attributes>
     </entity>
+
+    <embeddable class="domaindriven.splearn.domain.member.Profile">
+        <attributes>
+            <basic name="address">
+                <column name="profile_address" length="20"/>
+            </basic>
+        </attributes>
+    </embeddable>
 </entity-mappings>
