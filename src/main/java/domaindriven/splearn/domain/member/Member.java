@@ -64,6 +64,12 @@ public class Member extends AbstractEntity {
         return passwordEncoder.matches(password, this.passwordHash);
     }
 
+    public void updateInfo(MemberInfoUpdateRequest updateRequest) {
+        this.nickname = Objects.requireNonNull(updateRequest.nickname());
+
+        this.detail.updateInfo(updateRequest);
+    }
+
     public void changeNickname(String nickname) {
         this.nickname = Objects.requireNonNull(nickname);
     }

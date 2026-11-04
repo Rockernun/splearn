@@ -13,7 +13,7 @@
         </attributes>
     </mapped-superclass>
 
-    <entity class="domaindriven.splearn.domain.Member">
+    <entity class="domaindriven.splearn.domain.member.Member">
         <table name="MEMBER">
             <unique-constraint name="UK_MEMBER_EMAIL_ADDRESS">
                 <column-name>email_address</column-name>
@@ -37,6 +37,22 @@
                 <column nullable="false" length="50"/>
                 <enumerated>STRING</enumerated>
             </basic>
+            <one-to-one name="detail">
+                <cascade>
+                    <cascade-persist/>
+                </cascade>
+            </one-to-one>
+        </attributes>
+    </entity>
+
+    <entity class="domaindriven.splearn.domain.member.MemberDetail">
+        <table name="MEMBER_DETAIL"/>
+        <attributes>
+            <basic name="profile"/>
+            <basic name="introduction"/>
+            <basic name="registeredAt"/>
+            <basic name="activatedAt"/>
+            <basic name="deactivatedAt"/>
         </attributes>
     </entity>
 </entity-mappings>
