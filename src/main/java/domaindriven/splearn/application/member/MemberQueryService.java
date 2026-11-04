@@ -1,8 +1,8 @@
-package domaindriven.splearn.application;
+package domaindriven.splearn.application.member;
 
-import domaindriven.splearn.application.provided.MemberFinder;
-import domaindriven.splearn.application.required.MemberRepository;
-import domaindriven.splearn.domain.Member;
+import domaindriven.splearn.application.member.provided.MemberFinder;
+import domaindriven.splearn.application.member.required.MemberRepository;
+import domaindriven.splearn.domain.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

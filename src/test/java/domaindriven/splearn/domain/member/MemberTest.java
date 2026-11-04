@@ -1,7 +1,7 @@
-package domaindriven.splearn.domain;
+package domaindriven.splearn.domain.member;
 
-import static domaindriven.splearn.domain.MemberFixture.createMemberRegisterRequest;
-import static domaindriven.splearn.domain.MemberFixture.createPasswordEncoder;
+import static domaindriven.splearn.domain.member.MemberFixture.createMemberRegisterRequest;
+import static domaindriven.splearn.domain.member.MemberFixture.createPasswordEncoder;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -22,13 +22,17 @@ class MemberTest {
     @Test
     void registerMember() {
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
+        assertThat(member.getDetail().getRegisteredAt()).isNotNull();
     }
     
     @Test
     void activate() {
+        assertThat(member.getDetail().getActivatedAt()).isNull();
+
         member.activate();
 
         assertThat(member.getStatus()).isEqualTo(MemberStatus.ACTIVE);
+        assertThat(member.getDetail().getActivatedAt()).isNotNull();
     }
 
     @Test
@@ -44,9 +48,12 @@ class MemberTest {
     void deactivate() {
         member.activate();
 
+        assertThat(member.getDetail().getDeactivatedAt()).isNull();
+
         member.deactivate();
 
         assertThat(member.getStatus()).isEqualTo(MemberStatus.DEACTIVATED);
+        assertThat(member.getDetail().getDeactivatedAt()).isNotNull();
     }
 
     @Test

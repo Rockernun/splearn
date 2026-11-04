@@ -1,8 +1,8 @@
 package domaindriven.splearn;
 
-import domaindriven.splearn.application.required.EmailSender;
-import domaindriven.splearn.domain.MemberFixture;
-import domaindriven.splearn.domain.PasswordEncoder;
+import domaindriven.splearn.application.member.required.EmailSender;
+import domaindriven.splearn.domain.member.MemberFixture;
+import domaindriven.splearn.domain.member.PasswordEncoder;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 

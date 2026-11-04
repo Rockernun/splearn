@@ -1,12 +1,11 @@
-package domaindriven.splearn.application.provided;
+package domaindriven.splearn.application.member.provided;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 import domaindriven.splearn.SplearnTestConfiguration;
-import domaindriven.splearn.domain.Member;
-import domaindriven.splearn.domain.MemberFixture;
+import domaindriven.splearn.domain.member.Member;
+import domaindriven.splearn.domain.member.MemberFixture;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

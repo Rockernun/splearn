@@ -1,7 +1,7 @@
-package domaindriven.splearn.application.required;
+package domaindriven.splearn.application.member.required;
 
-import domaindriven.splearn.domain.Email;
-import domaindriven.splearn.domain.Member;
+import domaindriven.splearn.domain.shared.Email;
+import domaindriven.splearn.domain.member.Member;
 import java.util.Optional;
 import org.springframework.data.repository.Repository;
 

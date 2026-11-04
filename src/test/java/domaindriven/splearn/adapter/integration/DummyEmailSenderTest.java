@@ -2,7 +2,7 @@ package domaindriven.splearn.adapter.integration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domaindriven.splearn.domain.Email;
+import domaindriven.splearn.domain.shared.Email;
 import org.junit.jupiter.api.Test;
 import org.junitpioneer.jupiter.StdIo;
 import org.junitpioneer.jupiter.StdOut;

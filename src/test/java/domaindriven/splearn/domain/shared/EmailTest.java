@@ -1,4 +1,4 @@
-package domaindriven.splearn.domain;
+package domaindriven.splearn.domain.shared;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,4 +1,4 @@
-package domaindriven.splearn.domain;
+package domaindriven.splearn.domain.member;
 
 public class MemberFixture {
     public static MemberRegisterRequest createMemberRegisterRequest(String email) {

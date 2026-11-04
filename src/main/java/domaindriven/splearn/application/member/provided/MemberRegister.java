@@ -1,7 +1,7 @@
-package domaindriven.splearn.application.provided;
+package domaindriven.splearn.application.member.provided;
 
-import domaindriven.splearn.domain.Member;
-import domaindriven.splearn.domain.MemberRegisterRequest;
+import domaindriven.splearn.domain.member.Member;
+import domaindriven.splearn.domain.member.MemberRegisterRequest;
 import jakarta.validation.Valid;
 
 /**

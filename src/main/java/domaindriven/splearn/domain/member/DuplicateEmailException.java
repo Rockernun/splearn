@@ -1,4 +1,4 @@
-package domaindriven.splearn.domain;
+package domaindriven.splearn.domain.member;
 
 public class DuplicateEmailException extends RuntimeException {
     public DuplicateEmailException(String message) {}

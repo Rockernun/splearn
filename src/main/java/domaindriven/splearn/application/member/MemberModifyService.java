@@ -1,14 +1,14 @@
-package domaindriven.splearn.application;
+package domaindriven.splearn.application.member;
 
-import domaindriven.splearn.application.provided.MemberFinder;
-import domaindriven.splearn.application.provided.MemberRegister;
-import domaindriven.splearn.application.required.EmailSender;
-import domaindriven.splearn.application.required.MemberRepository;
-import domaindriven.splearn.domain.DuplicateEmailException;
-import domaindriven.splearn.domain.Email;
-import domaindriven.splearn.domain.Member;
-import domaindriven.splearn.domain.MemberRegisterRequest;
-import domaindriven.splearn.domain.PasswordEncoder;
+import domaindriven.splearn.application.member.provided.MemberFinder;
+import domaindriven.splearn.application.member.provided.MemberRegister;
+import domaindriven.splearn.application.member.required.EmailSender;
+import domaindriven.splearn.application.member.required.MemberRepository;
+import domaindriven.splearn.domain.member.DuplicateEmailException;
+import domaindriven.splearn.domain.shared.Email;
+import domaindriven.splearn.domain.member.Member;
+import domaindriven.splearn.domain.member.MemberRegisterRequest;
+import domaindriven.splearn.domain.member.PasswordEncoder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

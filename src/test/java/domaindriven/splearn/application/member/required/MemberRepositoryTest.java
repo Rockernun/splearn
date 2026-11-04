@@ -1,10 +1,11 @@
-package domaindriven.splearn.application.required;
+package domaindriven.splearn.application.member.required;
 
-import static domaindriven.splearn.domain.MemberFixture.*;
+import static domaindriven.splearn.domain.member.MemberFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import domaindriven.splearn.domain.Member;
+import domaindriven.splearn.domain.member.Member;
+import domaindriven.splearn.domain.member.MemberStatus;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,11 @@ class MemberRepositoryTest {
         assertThat(member.getId()).isNotNull();
 
         entityManager.flush();
+        entityManager.clear();
+
+        var found = memberRepository.findById(member.getId()).orElseThrow();
+        assertThat(found.getStatus()).isEqualTo(MemberStatus.PENDING);
+        assertThat(found.getDetail().getRegisteredAt()).isNotNull();
     }
     
     @Test
