@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import domaindriven.splearn.SplearnTestConfiguration;
 import domaindriven.splearn.domain.member.DuplicateEmailException;
+import domaindriven.splearn.domain.member.DuplicateProfileException;
 import domaindriven.splearn.domain.member.Member;
 import domaindriven.splearn.domain.member.MemberFixture;
 import domaindriven.splearn.domain.member.MemberInfoUpdateRequest;
@@ -70,6 +71,13 @@ record MemberRegisterTest(MemberRegister memberRegister, EntityManager entityMan
         return member;
     }
 
+    private Member registerMember(String email) {
+        Member member = memberRegister.register(MemberFixture.createMemberRegisterRequest(email));
+        entityManager.flush();
+        entityManager.clear();
+        return member;
+    }
+
     @Test
     void updateInfo() {
         Member member = registerMember();
@@ -81,6 +89,37 @@ record MemberRegisterTest(MemberRegister memberRegister, EntityManager entityMan
         member = memberRegister.updateInfo(member.getId(), new MemberInfoUpdateRequest("Eveveryhandsome", "rockeraddress", "자기소개"));
 
         assertThat(member.getDetail().getProfile().address()).isEqualTo("rockeraddress");
+    }
+
+    @Test
+    void updateInfoFail() {
+        Member member1 = registerMember();
+        memberRegister.activate(member1.getId());
+        memberRegister.updateInfo(member1.getId(), new MemberInfoUpdateRequest("Eveveryhandsome", "rockeraddress", "자기소개"));
+
+        Member member2 = registerMember("byunguk2@splearn.com");
+        memberRegister.activate(member2.getId());
+        entityManager.flush();
+        entityManager.clear();
+
+        // member2는 기존의 member1과 같은 프로필을 사용할 수 없다
+        assertThatThrownBy(() -> {
+            memberRegister.updateInfo(member2.getId(), new MemberInfoUpdateRequest("aareveryhandsome", "rockeraddress", "introduction"));
+        }).isInstanceOf(DuplicateProfileException.class);
+
+        // 다른 프로필 주소로는 변경 가능
+        memberRegister.updateInfo(member2.getId(), new MemberInfoUpdateRequest("aareveryhandsome", "rockeraddress1", "introduction"));
+
+        // 기존 프로필 주소를 바꾸는 것도 가능
+        memberRegister.updateInfo(member1.getId(), new MemberInfoUpdateRequest("aareveryhandsome", "rockeraddress", "introduction"));
+
+        // 프로필 주소를 제거하는 것도 가능
+        memberRegister.updateInfo(member1.getId(), new MemberInfoUpdateRequest("aareveryhandsome", "", "introduction"));
+
+        // 프로필 주소 중복은 허용하지 않음
+        assertThatThrownBy(() -> {
+            memberRegister.updateInfo(member1.getId(), new MemberInfoUpdateRequest("aareveryhandsome", "rockeraddress1", "introduction"));
+        }).isInstanceOf(DuplicateProfileException.class);
     }
 
     @Test

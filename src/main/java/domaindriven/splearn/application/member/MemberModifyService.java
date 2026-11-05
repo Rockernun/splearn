@@ -5,7 +5,9 @@ import domaindriven.splearn.application.member.provided.MemberRegister;
 import domaindriven.splearn.application.member.required.EmailSender;
 import domaindriven.splearn.application.member.required.MemberRepository;
 import domaindriven.splearn.domain.member.DuplicateEmailException;
+import domaindriven.splearn.domain.member.DuplicateProfileException;
 import domaindriven.splearn.domain.member.MemberInfoUpdateRequest;
+import domaindriven.splearn.domain.member.Profile;
 import domaindriven.splearn.domain.shared.Email;
 import domaindriven.splearn.domain.member.Member;
 import domaindriven.splearn.domain.member.MemberRegisterRequest;
@@ -58,12 +60,25 @@ public class MemberModifyService implements MemberRegister {
     }
 
     @Override
-    public Member updateInfo(Long memberId, MemberInfoUpdateRequest updateRequest) {
+    public Member updateInfo(Long memberId, MemberInfoUpdateRequest memberInfoUpdateRequest) {
         Member member = memberFinder.find(memberId);
 
-        member.updateInfo(updateRequest);
+        checkDuplicateProfile(member, memberInfoUpdateRequest.profileAddress());
+
+        member.updateInfo(memberInfoUpdateRequest);
 
         return memberRepository.save(member);
+    }
+
+    private void checkDuplicateProfile(Member member, String profileAddress) {
+        if (profileAddress.isEmpty()) return;
+
+        Profile currentProfile = member.getDetail().getProfile();
+        if (currentProfile != null && currentProfile.address().equals(profileAddress)) return;
+
+        if (memberRepository.findByProfile(new Profile(profileAddress)).isPresent()) {
+            throw new DuplicateProfileException("이미 존재하는 프로필 주소입니다: " + profileAddress);
+        }
     }
 
     private void sendWelcomeEmail(Member member) {
