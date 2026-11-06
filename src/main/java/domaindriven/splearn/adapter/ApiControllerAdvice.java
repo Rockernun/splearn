@@ -23,7 +23,7 @@ public class ApiControllerAdvice extends ResponseEntityExceptionHandler {
     }
 
     private static ProblemDetail getProblemDetail(HttpStatus httpStatus, Exception exception) {
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, exception.getMessage());
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(httpStatus, exception.getMessage());
 
         problemDetail.setProperty("timestamp", LocalDateTime.now());
         problemDetail.setProperty("exception", exception.getClass().getSimpleName());
