@@ -42,7 +42,7 @@ dependencies {
     testCompileOnly("org.projectlombok:lombok")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testAnnotationProcessor("org.projectlombok:lombok")
-    testImplementation("org.mockito:mockito-core:5.18.0")
+    testImplementation("org.mockito:mockito-core:5.23.0")
     testImplementation("com.tngtech.archunit:archunit-junit5:1.4.1")
     mockitoAgent("org.mockito:mockito-core:5.18.0") { isTransitive = false }
 }
