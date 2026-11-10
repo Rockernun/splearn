@@ -3,7 +3,7 @@ package domaindriven.splearn.adapter.webapi;
 import domaindriven.splearn.adapter.webapi.dto.MemberRegisterResponse;
 import domaindriven.splearn.application.member.provided.MemberRegister;
 import domaindriven.splearn.domain.member.Member;
-import domaindriven.splearn.domain.member.MemberRegisterRequest;
+import domaindriven.splearn.application.member.provided.MemberRegisterRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

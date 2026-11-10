@@ -2,7 +2,7 @@ package domaindriven.splearn;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domaindriven.splearn.domain.member.MemberRegisterRequest;
+import domaindriven.splearn.application.member.provided.MemberRegisterRequest;
 import java.util.function.Consumer;
 import org.assertj.core.api.AssertProvider;
 import org.springframework.test.json.JsonPathValueAssert;

@@ -9,7 +9,6 @@ import domaindriven.splearn.domain.member.DuplicateProfileException;
 import domaindriven.splearn.domain.member.Member;
 import domaindriven.splearn.domain.member.MemberFixture;
 import domaindriven.splearn.domain.member.MemberInfoUpdateRequest;
-import domaindriven.splearn.domain.member.MemberRegisterRequest;
 import domaindriven.splearn.domain.member.MemberStatus;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.ConstraintViolationException;

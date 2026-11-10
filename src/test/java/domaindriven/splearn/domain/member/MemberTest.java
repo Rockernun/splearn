@@ -16,7 +16,7 @@ class MemberTest {
     @BeforeEach
     void setUp() {
         this.passwordEncoder = createPasswordEncoder();
-        member = Member.register(createMemberRegisterRequest(), passwordEncoder);
+        member = Member.register(createMemberRegisterRequest().toInfo(), passwordEncoder);
     }
 
     @Test
@@ -96,10 +96,10 @@ class MemberTest {
     @Test
     void invalidEmail() {
         assertThatThrownBy(() -> {
-            Member.register(createMemberRegisterRequest("invalid email"), passwordEncoder);
+            Member.register(createMemberRegisterRequest("invalid email").toInfo(), passwordEncoder);
         }).isInstanceOf(IllegalArgumentException.class);
 
-        Member.register(createMemberRegisterRequest(), passwordEncoder);
+        Member.register(createMemberRegisterRequest().toInfo(), passwordEncoder);
     }
     
     @Test

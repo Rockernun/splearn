@@ -10,9 +10,8 @@ import domaindriven.splearn.domain.member.MemberInfoUpdateRequest;
 import domaindriven.splearn.domain.member.Profile;
 import domaindriven.splearn.domain.shared.Email;
 import domaindriven.splearn.domain.member.Member;
-import domaindriven.splearn.domain.member.MemberRegisterRequest;
+import domaindriven.splearn.application.member.provided.MemberRegisterRequest;
 import domaindriven.splearn.domain.member.PasswordEncoder;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +31,7 @@ public class MemberModifyService implements MemberRegister {
     public Member register(MemberRegisterRequest registerRequest) {
         checkDuplicateEmail(registerRequest);
 
-        Member member = Member.register(registerRequest, passwordEncoder);
+        Member member = Member.register(registerRequest.toInfo(), passwordEncoder);
 
         memberRepository.save(member);
 

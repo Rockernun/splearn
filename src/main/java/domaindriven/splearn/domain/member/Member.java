@@ -28,12 +28,12 @@ public class Member extends AbstractEntity {
 
     private MemberDetail detail;
 
-    public static Member register(MemberRegisterRequest registerRequest, PasswordEncoder passwordEncoder) {
+    public static Member register(MemberRegisterInfo createRequest, PasswordEncoder passwordEncoder) {
         Member member = new Member();
 
-        member.email = new Email(registerRequest.email());
-        member.nickname = Objects.requireNonNull(registerRequest.nickname());
-        member.passwordHash = Objects.requireNonNull(passwordEncoder.encode(registerRequest.password()));
+        member.email = new Email(createRequest.email());
+        member.nickname = Objects.requireNonNull(createRequest.nickname());
+        member.passwordHash = Objects.requireNonNull(passwordEncoder.encode(createRequest.password()));
 
         member.status = MemberStatus.PENDING;
 

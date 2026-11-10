@@ -8,7 +8,7 @@ import static org.mockito.Mockito.when;
 import domaindriven.splearn.application.member.provided.MemberRegister;
 import domaindriven.splearn.domain.member.Member;
 import domaindriven.splearn.domain.member.MemberFixture;
-import domaindriven.splearn.domain.member.MemberRegisterRequest;
+import domaindriven.splearn.application.member.provided.MemberRegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
