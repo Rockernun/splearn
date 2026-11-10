@@ -17,8 +17,7 @@ public class ApiControllerAdvice extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler({DuplicateEmailException.class, DuplicateProfileException.class})
-    public ProblemDetail emailExceptionHandler(DuplicateEmailException exception) {
-        // RFC-9457
+    public ProblemDetail duplicateExceptionHandler(RuntimeException exception) {
         return getProblemDetail(HttpStatus.CONFLICT, exception);
     }
 
